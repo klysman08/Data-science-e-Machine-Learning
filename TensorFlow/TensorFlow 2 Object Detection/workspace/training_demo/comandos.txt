@@ -1,0 +1,9 @@
+		Converter XMLs para o formato RECORD
+
+python generate_tfrecord.py -x "C:\Users\klysm\Desktop\TCX\Treinamento\TensorFlow\workspace\training_demo\images\train" -l "C:\Users\klysm\Desktop\TCX\Treinamento\TensorFlow\workspace\training_demo\annotations\label_map.pbtxt" -o "C:\Users\klysm\Desktop\TCX\Treinamento\TensorFlow\workspace\training_demo\annotations\train.record"
+
+python generate_tfrecord.py -x "C:\Users\klysm\Desktop\TCX\Treinamento\TensorFlow\workspace\training_demo\images\val" -l "C:\Users\klysm\Desktop\TCX\Treinamento\TensorFlow\workspace\training_demo\annotations\label_map.pbtxt" -o "C:\Users\klysm\Desktop\TCX\Treinamento\TensorFlow\workspace\training_demo\annotations\val.record"
+
+		Modelo de treinamento
+
+python model_main_tf2.py --model_dir=models/my_mobilenet_v2 --pipeline_config_path=models/my_mobilenet_v2/pipeline.config
