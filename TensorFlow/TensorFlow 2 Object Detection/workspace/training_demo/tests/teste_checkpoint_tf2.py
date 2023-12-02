@@ -5,6 +5,7 @@ Object Detection From TF2 Checkpoint
 ====================================
 """
 
+
 # This demo will take you through the steps of running an "out-of-the-box" TensorFlow 2 compatible
 # detection model on a collection of images. More specifically, in this example we will be using
 # the `Checkpoint Format <https://www.tensorflow.org/guide/checkpoint>`__ to load the model.
@@ -39,7 +40,9 @@ PATH_TO_LABELS = os.path.join(MODELS_DIR, os.path.join(MODEL_NAME, LABEL_FILENAM
 filenames = range(1, 200)
 IMAGE_PATHS = []
 for filename in filenames:
-    image_path = os.path.join(IMAGE_DIR, os.path.join(IMAGE_DIR, str(filename)+'.jpg'))
+    image_path = os.path.join(
+        IMAGE_DIR, os.path.join(IMAGE_DIR, f'{str(filename)}.jpg')
+    )
     image_path = pathlib.Path(image_path)
     IMAGE_PATHS.append(str(image_path))
 
@@ -71,13 +74,11 @@ def detect_fn(image):
 
     image, shapes = detection_model.preprocess(image)
     prediction_dict = detection_model.predict(image, shapes)
-    detections = detection_model.postprocess(prediction_dict, shapes)
-
-    return detections
+    return detection_model.postprocess(prediction_dict, shapes)
 
 end_time = time.time()
 elapsed_time = end_time - start_time
-print('Done! Took {} seconds'.format(elapsed_time))
+print(f'Done! Took {elapsed_time} seconds')
 
 # Load label map data (for plotting)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -127,7 +128,7 @@ def load_image_into_numpy_array(path):
 
 for image_path in IMAGE_PATHS:
 
-    print('Running inference for {}... '.format(image_path), end='')
+    print(f'Running inference for {image_path}... ', end='')
 
     image_np = load_image_into_numpy_array(image_path)
 
